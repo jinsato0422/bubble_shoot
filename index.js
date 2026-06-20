@@ -122,12 +122,19 @@ function animate() {
 
         projectiles.forEach(projectile => {
             const center_dist_projectile = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
-
+            // when projectile hits enemy
             if (center_dist_projectile - enemy.radius - projectile.radius < 1) {
-                setTimeout(() => {
-                    enemies.splice(enemies.indexOf(enemy), 1);
+                if (enemy.radius - 10 > 5) {
+                    gsap.to(enemy, {
+                        radius: enemy.radius - 10
+                    });
                     projectiles.splice(projectiles.indexOf(projectile), 1);
-                }, 0);
+                } else {
+                    setTimeout(() => {
+                        enemies.splice(enemies.indexOf(enemy), 1);
+                        projectiles.splice(projectiles.indexOf(projectile), 1);
+                    }, 0);
+                }
             }
 
         });
