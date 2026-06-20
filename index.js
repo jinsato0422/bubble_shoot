@@ -101,6 +101,14 @@ function animate() {
     player.draw();
     projectiles.forEach((projectile) => {
         projectile.update();
+
+        // Remove projectiles that go off screen
+        if (projectile.x + projectile.radius < 0 ||
+            projectile.x - projectile.radius > canvas.width ||
+            projectile.y + projectile.radius < 0 ||
+            projectile.y - projectile.radius > canvas.height) {
+            projectiles.splice(projectiles.indexOf(projectile), 1);
+        }
     });
     enemies.forEach((enemy) => {
         enemy.update();
