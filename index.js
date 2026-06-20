@@ -94,8 +94,9 @@ function spawnEnemies() {
     }, 1000);
 }
 
+let animationId;
 function animate() {
-    requestAnimationFrame(animate);
+    animationId = requestAnimationFrame(animate);
     c.clearRect(0, 0, canvas.width, canvas.height);
     player.draw();
     projectiles.forEach((projectile) => {
@@ -104,10 +105,16 @@ function animate() {
     enemies.forEach((enemy) => {
         enemy.update();
 
-        projectiles.forEach(projectile => {
-            const center_dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
+        const center_dist_player = Math.hypot(player.x - enemy.x, player.y - enemy.y);
 
-            if (center_dist - enemy.radius - projectile.radius < 1) {
+        if (center_dist_player - enemy.radius - player.radius < 1) {
+            cancelAnimationFrame(animationId);
+        }
+
+        projectiles.forEach(projectile => {
+            const center_dist_projectile = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
+
+            if (center_dist_projectile - enemy.radius - projectile.radius < 1) {
                 setTimeout(() => {
                     enemies.splice(enemies.indexOf(enemy), 1);
                     projectiles.splice(projectiles.indexOf(projectile), 1);
