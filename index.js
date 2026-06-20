@@ -103,6 +103,18 @@ function animate() {
     });
     enemies.forEach((enemy) => {
         enemy.update();
+
+        projectiles.forEach(projectile => {
+            const center_dist = Math.hypot(projectile.x - enemy.x, projectile.y - enemy.y);
+
+            if (center_dist - enemy.radius - projectile.radius < 1) {
+                setTimeout(() => {
+                    enemies.splice(enemies.indexOf(enemy), 1);
+                    projectiles.splice(projectiles.indexOf(projectile), 1);
+                }, 0);
+            }
+
+        });
     });
 }
 
