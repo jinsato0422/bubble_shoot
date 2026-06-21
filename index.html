@@ -8,7 +8,19 @@
 	</head>
 	<body>
         <div class="fixed top-0 left-0 p-4 text-white text-sm select-none">Score: <span id="score">0</span></div>
-		<canvas></canvas>
+		
+        <div id="modal" class = "fixed inset-0 flex items-center justify-center">
+            <div class = "bg-white max-w-sm w-full p-6 rounded-lg shadow-lg text-center">
+                <h1 id="modal_score" class="text-4xl font-bold">0</h1> 
+                <p class="text-gray-700">Points</p>
+                <div class="mt-4">
+                    <button id="startGame" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Start Game
+                    </button>
+                </div>
+            </div>
+        </div>
+        <canvas></canvas>
 	</body>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js" integrity="sha512-NcZdtrT77bJr4STcmsGAESr06BYGE8woZdSdEgqnpyqac7sugNO+Tr4bGwGF3MsnEkGKhU2KL2xh6Ec+BqsaHA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
