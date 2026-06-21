@@ -1,4 +1,5 @@
 const canvas = document.querySelector('canvas');
+const scoreElement = document.getElementById('score');
 const c = canvas.getContext('2d');
 
 canvas.width = window.innerWidth;
@@ -129,6 +130,7 @@ function spawnEnemies() {
 }
 
 let animationId;
+let score = 0;
 function animate() {
     animationId = requestAnimationFrame(animate);
     c.fillStyle = 'rgba(0, 0, 0, 0.1)';
@@ -184,12 +186,18 @@ function animate() {
                     ));
                 }
 
+                // Shrink enemy or remove enemy
                 if (enemy.radius - 10 > 5) {
+                    score += 100;
+                    scoreElement.innerHTML = score;
                     gsap.to(enemy, {
                         radius: enemy.radius - 10
                     });
                     projectiles.splice(projectiles.indexOf(projectile), 1);
                 } else {
+                    score += 250;
+                    scoreElement.innerHTML = score;
+                    
                     setTimeout(() => {
                         enemies.splice(enemies.indexOf(enemy), 1);
                         projectiles.splice(projectiles.indexOf(projectile), 1);
